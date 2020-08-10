@@ -1,0 +1,184 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-08-09T21:03:43.582Z",
+    "end": "2020-08-09T21:03:43.582Z",
+    "duration": 83397,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "377b1214-4f2d-4190-86ba-4e5c4117d754",
+      "title": "",
+      "fullFile": "cypress\\integration\\listagem.spec.js",
+      "file": "cypress\\integration\\listagem.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "46761534-bfeb-4823-bd47-b16a0a4a56ad",
+          "title": "Listagem",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Listagem sem registros",
+              "fullTitle": "Listagem Listagem sem registros",
+              "timedOut": null,
+              "duration": 22482,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.server();\ncy.route({\n  method: 'GET',\n  url: '**/api/1/databases/userdetails/collections/newtable?**',\n  status: 200,\n  response: 'fx:webtable-get-void'\n}).as('getNewtable');\ncy.visit('WebTable.html'); //Tamanho da lista seja = 1, apenas o cabeçalho\ncy.get('div[role=row]').should('have.length', 1);",
+              "err": {},
+              "uuid": "587433d6-8654-419d-9ab8-9bd46dae7dc2",
+              "parentUUID": "46761534-bfeb-4823-bd47-b16a0a4a56ad",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Listagem com apenas um registro",
+              "fullTitle": "Listagem Listagem com apenas um registro",
+              "timedOut": null,
+              "duration": 7429,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.server();\ncy.route({\n  method: 'GET',\n  url: '**/api/1/databases/userdetails/collections/newtable?**',\n  status: 200,\n  response: 'fx:webtable-get-only'\n});\ncy.visit('WebTable.html');\ncy.get('div[role=row] div[role=gridcell]').eq(4).find('div').as('gridCellPhone');\ncy.get('@gridCellPhone').should('contain.text', '9980161200');",
+              "err": {},
+              "uuid": "d784b51f-884b-432f-80d9-791a4a92592e",
+              "parentUUID": "46761534-bfeb-4823-bd47-b16a0a4a56ad",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "587433d6-8654-419d-9ab8-9bd46dae7dc2",
+            "d784b51f-884b-432f-80d9-791a4a92592e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 29911,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "7d723403-7f8e-47b4-8511-6b4271595e46",
+      "title": "",
+      "fullFile": "cypress\\integration\\cadastro.spec.js",
+      "file": "cypress\\integration\\cadastro.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "be4018b4-476b-4eaf-92d4-5e98c07bb0dc",
+          "title": "Cadastro",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cadastro de usuário no site",
+              "fullTitle": "Cadastro Cadastro de usuário no site",
+              "timedOut": null,
+              "duration": 53486,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//rotas\ncy.server();\ncy.route('POST', '**/api/1/databases/userdetails/collections/newtable?**').as('postNewtable');\ncy.route('POST', '**/api/1/databases/userdetails/collections/usertable?**').as('postUsertable');\ncy.route('GET', '**/api/1/databases/userdetails/collections/newtable?**').as('getNewtable'); // baseURL + caminho Register.html\ncy.visit('Register.html'); // type\ncy.get('input[placeholder=\"First Name\"]').type(chance.first());\ncy.get('input[placeholder=\"Last Name\"]').type(chance.last());\ncy.get('input[ng-model=\"EmailAdress\"]').type(chance.email());\ncy.get('input[ng-model=\"Phone\"]').type(chance.phone({\n  formatted: false\n})); // check -> radio e checkbox\ncy.get('input[value=\"Male\"]').check();\ncy.get('input[type=\"checkbox\"]').check('Cricket');\ncy.get('input[type=\"checkbox\"]').check('Hockey'); // select \ncy.get('select#Skills').select('Javascript');\ncy.get('select#countries').select('Canada');\ncy.get('select#country').select('United States of America', {\n  force: true\n});\ncy.get('select#yearbox').select('1996');\ncy.get('select[placeholder=\"Month\"]').select('August');\ncy.get('select#daybox').select('8');\ncy.get('input#firstpassword').type('Teste@123');\ncy.get('input#secondpassword').type('Teste@123'); // input filhe\ncy.get('input#imagesrc').attachFile('sol.jpg'); // click\ncy.get('button#submitbtn').click();\ncy.wait('@postNewtable').then(function (resNewtable) {\n  expect(resNewtable.status).to.eq(200);\n});\ncy.wait('@postUsertable').then(function (resUsertable) {\n  expect(resUsertable.status).to.eq(200);\n});\ncy.wait('@getNewtable').then(function (resNewtable) {\n  expect(resNewtable.status).to.eq(200);\n}); //validar se foi direcionado para pagina correta\ncy.url().should('contain', 'WebTable');",
+              "err": {},
+              "uuid": "f429d148-a10c-4440-b3d2-c3148c14b3b8",
+              "parentUUID": "be4018b4-476b-4eaf-92d4-5e98c07bb0dc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f429d148-a10c-4440-b3d2-c3148c14b3b8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 53486,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "mochawesome-report",
+        "quiet": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}
